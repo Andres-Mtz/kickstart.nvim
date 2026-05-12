@@ -1,26 +1,24 @@
 --[[
---
--- This file is not required for your own configuration,
--- but helps people determine if their system is setup correctly.
---
+-- Health check for the nvim-vimpack config.
+-- Run with :checkhealth custom
 --]]
 
 local check_version = function()
   local verstr = tostring(vim.version())
-  if not vim.version.ge then
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", verstr))
-    return
-  end
-
-  if vim.version.ge(vim.version(), '0.10-dev') then
+  if vim.version.ge(vim.version(), '0.12-dev') then
     vim.health.ok(string.format("Neovim version is: '%s'", verstr))
   else
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", verstr))
+    vim.health.error(string.format("Neovim out of date: '%s'. Requires 0.12+ for vim.pack", verstr))
+  end
+
+  if vim.pack then
+    vim.health.ok 'vim.pack is available'
+  else
+    vim.health.error 'vim.pack is NOT available (requires Neovim 0.12+)'
   end
 end
 
 local check_external_reqs = function()
-  -- Basic utils: `git`, `make`, `unzip`
   for _, exe in ipairs { 'git', 'make', 'unzip', 'rg' } do
     local is_executable = vim.fn.executable(exe) == 1
     if is_executable then
@@ -35,7 +33,7 @@ end
 
 return {
   check = function()
-    vim.health.start 'kickstart.nvim'
+    vim.health.start 'nvim-vimpack'
 
     vim.health.info [[NOTE: Not every warning is a 'must-fix' in `:checkhealth`
 
