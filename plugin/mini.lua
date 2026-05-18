@@ -2,9 +2,9 @@
 -- Loaded with sync = true so the statusline is visible immediately.
 
 require('lazyload').on_vim_enter(function()
-  vim.pack.add({
+  vim.pack.add {
     { src = 'https://github.com/echasnovski/mini.nvim' },
-  })
+  }
 
   -- Better Around/Inside textobjects
   require('mini.ai').setup { n_lines = 500 }

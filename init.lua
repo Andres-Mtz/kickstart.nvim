@@ -1,9 +1,12 @@
 ---@diagnostic disable: undefined-global
 -- nvim-vimpack config
 -- Uses the built-in vim.pack package manager (requires Neovim >= 0.12)
---
--- Launch with:   $env:NVIM_APPNAME = "nvim-vimpack"; nvim
 -- Update plugins: :lua vim.pack.update()
+
+-- Zscaler SSL inspection: Node.js doesn't use the Windows cert store,
+-- so point all child Node.js processes at the exported Zscaler root CA.
+-- Must be set before any plugin (LSP server, copilot, etc.) spawns.
+vim.env.NODE_EXTRA_CA_CERTS = vim.fn.expand '~/.ssl/zscaler-ca.pem'
 
 -- Disable netrw in favour of oil.nvim.
 -- Must be set before any plugin loads.

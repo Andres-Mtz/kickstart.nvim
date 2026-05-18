@@ -2,14 +2,14 @@
 -- neovim/nvim-lspconfig + mason + mason-lspconfig + mason-tool-installer + fidget + lazydev
 
 require('lazyload').on_vim_enter(function()
-  vim.pack.add({
+  vim.pack.add {
     { src = 'https://github.com/folke/lazydev.nvim' },
     { src = 'https://github.com/j-hui/fidget.nvim' },
     { src = 'https://github.com/mason-org/mason.nvim' },
     { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
     { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
-  })
+  }
 
   -- Setup lazydev for Neovim Lua API completions
   require('lazydev').setup {

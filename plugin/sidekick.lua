@@ -27,9 +27,16 @@ require('lazyload').on_vim_enter(function()
         split = { width = 80, height = 20 },
       },
       mux = {
-        enabled = false, -- tmux/zellij not available on Windows
+        enabled = false,
       },
       picker = 'telescope',
+    },
+    copilot = {
+      status = {
+        -- Zscaler SSL inspection causes a spurious proxy-detection warning from the Copilot LSP on every startup. Suppress it until IT adds the bypass.
+        -- Remove this once *.github.com / *.githubcopilot.com are excluded from Zscaler SSL inspection.
+        level = vim.log.levels.OFF,
+      },
     },
   }
 
@@ -71,10 +78,10 @@ require('lazyload').on_vim_enter(function()
     require('sidekick.cli').prompt()
   end, { desc = 'Sidekick: Select [P]rompt' })
 
-  -- Quick-open Claude directly
-  vim.keymap.set('n', '<leader>ac', function()
-    require('sidekick.cli').toggle { name = 'claude', focus = true }
-  end, { desc = 'Sidekick: Toggle [C]laude' })
+  -- -- Quick-open Claude directly
+  -- vim.keymap.set('n', '<leader>ac', function()
+  --   require('sidekick.cli').toggle { name = 'claude', focus = true }
+  -- end, { desc = 'Sidekick: Toggle [C]laude' })
 end)
 
 -- vim: ts=2 sts=2 sw=2 et
